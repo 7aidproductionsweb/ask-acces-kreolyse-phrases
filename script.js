@@ -1,4 +1,4 @@
-﻿const WEBHOOK_URL = "https://ai-9-productions.app.n8n.cloud/webhook/mots";
+﻿const WEBHOOK_URL = "https://ai-for-productions.app.n8n.cloud/webhook/email-forward";
 const RECIPIENT_EMAIL = "7aiproductions@gmail.com";
 
 const overlay = document.getElementById("modal-overlay");
@@ -67,12 +67,12 @@ form.addEventListener("submit", async (event) => {
   submitBtn.disabled = true;
   submitBtn.textContent = "Envoi...";
 
-  const subject = "Candidature beta-test Kreolyse traducteur de phrases";
+  const subject = `Demande beta-test Kreolyse Phrases - ${pseudo}`;
   const message =
     `Nouvelle demande beta-test.\n` +
     `Prenom/Pseudo: ${pseudo}\n` +
     `Email: ${senderEmail}\n` +
-    `Page: Kreolyse phrase link`;
+    `Source: Kreolyse phrase link`;
 
   try {
     const response = await fetch(WEBHOOK_URL, {
@@ -80,15 +80,16 @@ form.addEventListener("submit", async (event) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify([
-        {
-          senderEmail,
-          recipientEmail: RECIPIENT_EMAIL,
-          subject,
-          message,
-          sentAt: new Date().toISOString()
-        }
-      ])
+      body: JSON.stringify({
+        senderEmail,
+        recipientEmail: RECIPIENT_EMAIL,
+        subject,
+        message,
+        pseudo,
+        source: "Kreolyse phrase link",
+        requestType: "beta_test_kreolyse_phrases",
+        sentAt: new Date().toISOString()
+      })
     });
 
     if (!response.ok) {
@@ -105,4 +106,5 @@ form.addEventListener("submit", async (event) => {
     submitBtn.textContent = "Envoyer";
   }
 });
+
 
