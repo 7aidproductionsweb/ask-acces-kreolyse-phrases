@@ -1,4 +1,4 @@
-﻿const WEBHOOK_URL = "https://ai-for-productions.app.n8n.cloud/webhook/email-forward";
+﻿const WEBHOOK_URL = "https://ai-9-productions.app.n8n.cloud/webhook/email-forward";
 const RECIPIENT_EMAIL = "7aiproductions@gmail.com";
 
 const overlay = document.getElementById("modal-overlay");
@@ -106,5 +106,6 @@ form.addEventListener("submit", async (event) => {
     submitBtn.textContent = "Envoyer";
   }
 });
+
 
 
